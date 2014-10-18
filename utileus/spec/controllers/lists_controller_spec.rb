@@ -2,61 +2,53 @@ require 'rails_helper'
 
 describe ListsController do 
 	describe "index" do 
-		before(:each) do 
-			@user = FactoryGirl.create(:user, id: 1)
-			@list = FactoryGirl.create(:list, id: 1, user_id: 1)
+		it "populates an array of lists" do 
+			list = FactoryGirl.create(:list)
 			get :index
+			expect(assigns(:out)).to eq([list])
 		end
 
-		it "returns http code 200" do
-			expect(response).to have_http_status(200)
-		end
-
-		it "returns a list of a user's lists" do 
-			expect(List.all).not_to eq nil
+		it "renders the :index template" do 
+			get :index 
+			expect(response).to render_template :index
 		end
 	end
 
 	describe "show" do
-		before(:each) do 
-			@list = FactoryGirl.create(:list)
-			get(:show, { 'id' => @list.id })
+		it "assigns the requested list to @out" do 
+			list = FactoryGirl.create(:list)
+			get :show, id: list
+			expect(assigns(:out)).to eq(list)
 		end
 
-		it "returns http code 200" do
-			expect(response).to have_http_status(200)
-		end
-
-		it "returns a list" do
-			expect(List.find(@list.id)).not_to eq nil
+		it "renders the show template" do
+			get :show, id: FactoryGirl.create(:list)
+			expect(response).to render_template :show			
 		end
 	end
 
 	describe "create" do
-		before(:each) do
-			@list = FactoryGirl.build(:list)
-			get(:create, { 'list' => @list })
+		context "with valid attributes" do
+		it "creates a new list" do
+			expect{ post :create, list: FactoryGirl.attributes_for(:list) }.to change(List, :count).by(1)
 		end
 
-		it "returns http code 200" do
-			expect(response).to have_http_status(200)
+		it "redirects to the new contact" do
+			post :create, list: FactoryGirl.attributes_for(:list)
+			expect(response).to redirect_to List.last
 		end
+		context "with invalid attributes" do 
+			it "does not save the new list" do 
+				expect { post :create, list: FactoryGirl.attributes_for(:list, name: nil) }.to_not change(List, :count)
+			end
 
-		it "creates a list in the DB" do
-			expect(List.all).to contain @list
+			it "re-renders the new template" do
+				post :create, list: FactoryGirl.attributes_for(:list, name: nil)
+				expect(response).to render_template :new
+			end
 		end
 	end
-
-	describe "edit" do
-		before(:each) do
-			@list = FactoryGirl.create(:list)
-			get(:edit, { 'id' => @list.id })
-		end
-
-		it "returns http code 200" do
-			expect(response).to have_http_status(200)
-		end
-	end
+end
 
 	describe "update" do
 		before(:each) do
@@ -106,6 +98,7 @@ describe ListsController do
 		end
 
 		it "redirects to lists#index" do 
+			get :index
 			expect(response).to render_template :index
 		end
 	end
