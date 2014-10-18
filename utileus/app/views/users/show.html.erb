@@ -1,7 +1,9 @@
-<h2><%= @out.name %></h2>
-<h2><%= @out.professions.name %></h2>
+<p class="header-center">Search for a profession. Find people. Discover lists.</p>
 
-<h3><%= @out.lists.first.name %></h3>
+<h2><%= @out.name %></h2>
+<h3><%= @out.professions.first.name %></h3>
+
+<h4><%= @out.lists.first.name %></h4>
 <ul>
 	<% @out.lists.first.apps.each do |app| %> 
 	<li><%= app.name %></li>
