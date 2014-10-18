@@ -20,6 +20,7 @@ gem 'unicorn'
 # gem 'omniauth-twitter'
 gem 'omniauth-github'
 gem 'figaro'
+gem 'acts_as_votable', '~> 0.10.0'
 
 group :development do
   gem 'better_errors'
