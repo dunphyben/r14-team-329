@@ -2,8 +2,6 @@
 	<h1>Utileus</h1>
 
 	<p>Be productive.</p>
-
-	<a class="btn btn-primary btn-lg" href="/auth/github/">
-		<i class="fa fa-github"></i> Github
-	</a>
+	
+	<%= link_to("Sign in with Github", user_omniauth_authorize_path(:github), class: "btn btn-primary") %>
 </div>	
