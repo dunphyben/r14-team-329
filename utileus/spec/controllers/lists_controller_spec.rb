@@ -20,7 +20,7 @@ describe ListsController do
 	describe "show" do
 		before(:each) do 
 			@list = FactoryGirl.create(:list)
-			get(:show, { 'id' => '1' })
+			get(:show, { 'id' => @list.id })
 		end
 
 		it "returns http code 200" do
@@ -28,7 +28,85 @@ describe ListsController do
 		end
 
 		it "returns a list" do
-			expect(List.find(1)).not_to eq nil
+			expect(List.find(@list.id)).not_to eq nil
+		end
+	end
+
+	describe "create" do
+		before(:each) do
+			@list = FactoryGirl.build(:list)
+			get(:create, { 'list' => @list })
+		end
+
+		it "returns http code 200" do
+			expect(response).to have_http_status(200)
+		end
+
+		it "creates a list in the DB" do
+			expect(List.all).to contain @list
+		end
+	end
+
+	describe "edit" do
+		before(:each) do
+			@list = FactoryGirl.create(:list)
+			get(:edit, { 'id' => @list.id })
+		end
+
+		it "returns http code 200" do
+			expect(response).to have_http_status(200)
+		end
+	end
+
+	describe "update" do
+		before(:each) do
+			@list = FactoryGirl.create(:list)
+		end
+
+		context "with valid attributes" do
+			it "located the requested @list" do 
+				put :update, id: @list.id, list: FactoryGirl.attributes_for(:list)
+				expect{ assigns(:list).to eq @list }
+			end
+
+			it "changes @list's attributes" do
+				put :update, id: @list, list: FactoryGirl.attributes_for(:list, overview: "Updated")
+				@list.reload
+				expect(@list.overview).to eq ("Updated")
+			end
+		end
+
+		context "with invalid attributes" do
+			it "located the requested @list" do 
+				put :update, id: @list.id, list: FactoryGirl.attributes_for(:list)
+				expect{ assigns(:list).to eq @list }
+			end
+
+			it "does not change @list's attributes" do 
+				name = @list.name
+				put :update, id: @list.id, list: FactoryGirl.attributes_for(:list, name: nil)
+				@list.reload
+				expect(@list.name).to eq name
+			end
+
+			it "re-renders the edit template" do 
+				put :update, id: @list.id, list: FactoryGirl.attributes_for(:list, name: nil)
+				expect(response).to render_template :edit
+			end
+		end
+	end
+
+	describe "destroy" do
+		before(:each) do
+			@list = FactoryGirl.create(:list)
+		end
+
+		it "deletes the @list" do
+			expect{ delete :destroy, id: @list.id }.to change(List, :count).by(-1)
+		end
+
+		it "redirects to lists#index" do 
+			expect(response).to render_template :index
 		end
 	end
 end
