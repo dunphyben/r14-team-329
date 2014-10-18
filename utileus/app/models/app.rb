@@ -6,4 +6,5 @@ class App < ActiveRecord::Base
 	has_many :reviews, as: :reviewed
 	
 	validates :name, presence: true
+	validates :url, presence: true
 end
