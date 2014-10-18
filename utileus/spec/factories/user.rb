@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    id 1
-    name "Joe User"
+    name { Faker::Name.name }
+    profession_id { Faker::Number.number(1) }
   end
 end

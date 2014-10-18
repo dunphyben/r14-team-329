@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :list do
-  	id 1
-    name "My Cool List"
-    user_id 1
+    name { Faker::Lorem.words(4).join(" ").to_s }
+    overview { Faker::Lorem.sentence(10) }
+    user_id { Faker::Number.number(1) }
   end
 end
