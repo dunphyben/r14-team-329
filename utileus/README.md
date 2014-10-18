@@ -1,5 +1,7 @@
 # utileus
 ##### An odyssey of utility
+utileus.com  
+twitter: @utileus  
 
 ### Search a profession. Find people. Discover lists.
 
