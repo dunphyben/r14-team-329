@@ -2,33 +2,28 @@ require 'rails_helper'
 
 describe ListsController do 
 	describe "index" do 
-		before(:each) do 
-			@user = FactoryGirl.create(:user, id: 1)
-			@list = FactoryGirl.create(:list, id: 1, user_id: 1)
+		it "populates an array of lists" do 
+			list = FactoryGirl.create(:list)
 			get :index
+			expect(assigns(:out)).to eq([list])
 		end
 
-		it "returns http code 200" do
-			expect(response).to have_http_status(200)
-		end
-
-		it "returns a list of a user's lists" do 
-			expect(List.all).not_to eq nil
+		it "renders the :index template" do 
+			get :index 
+			expect(response).to render_template :index
 		end
 	end
 
 	describe "show" do
-		before(:each) do 
-			@list = FactoryGirl.create(:list)
-			get(:show, { 'id' => @list.id })
+		it "assigns the requested list to @out" do 
+			list = FactoryGirl.create(:list)
+			get :show, id: list
+			expect(assigns(:out)).to eq(list)
 		end
 
-		it "returns http code 200" do
-			expect(response).to have_http_status(200)
-		end
-
-		it "returns a list" do
-			expect(List.find(@list.id)).not_to eq nil
+		it "renders the show template" do
+			get :show, id: FactoryGirl.create(:list)
+			expect(response).to render_template :show			
 		end
 	end
 
