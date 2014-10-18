@@ -42,6 +42,16 @@ describe ListsController do
 			post :create, list: FactoryGirl.attributes_for(:list)
 			expect(response).to redirect_to List.last
 		end
+		context "with invalid attributes" do 
+			it "does not save the new list" do 
+				expect { post :create, list: FactoryGirl.attributes_for(:list, name: nil) }.to_not change(List, :count)
+			end
+
+			it "re-renders the new template" do
+				post :create, list: FactoryGirl.attributes_for(:list, name: nil)
+				expect(response).to render_template :new
+			end
+		end
 	end
 end
 
