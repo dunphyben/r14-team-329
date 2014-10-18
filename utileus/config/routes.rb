@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback" => "users#create"
 
   resources :users
+  resources :professions
+  resources :reviews
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
