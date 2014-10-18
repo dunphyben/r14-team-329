@@ -16,4 +16,19 @@ describe ListsController do
 			expect(List.all).not_to eq nil
 		end
 	end
+
+	describe "show" do
+		before(:each) do 
+			@list = FactoryGirl.create(:list)
+			get(:show, { 'id' => '1' })
+		end
+
+		it "returns http code 200" do
+			expect(response).to have_http_status(200)
+		end
+
+		it "returns a list" do
+			expect(List.find(1)).not_to eq nil
+		end
+	end
 end
