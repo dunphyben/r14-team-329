@@ -8,9 +8,9 @@ class ListsController < ApplicationController
 	end
 
 	def create
-		@list = current_user.lists.build(list_params)
+		@list = List.new(list_params)
 		if @list.save
-			redirect_to lists_path, notice: "List created successfully!"
+			redirect_to list_path(@list), notice: "List created successfully!"
 		else
 			flash[:alert] = "There was a problem creating your list. Please try again."
 			render action: :new
@@ -34,10 +34,10 @@ class ListsController < ApplicationController
 
 	def destroy
 		if List.destroy(params[:id])
-			redirect_to lists_path, notice: "List deleted."
+			redirect_to action: 'index'
 		else
 			flash[:alert] = "There was a problem deleting your list. Please try again."
-			redirect_to lists_path
+			redirect_to action: 'index'
 		end
 	end
 

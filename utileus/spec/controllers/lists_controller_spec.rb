@@ -33,30 +33,17 @@ describe ListsController do
 	end
 
 	describe "create" do
-		before(:each) do
-			@list = FactoryGirl.build(:list)
-			get(:create, { 'list' => @list })
+		context "with valid attributes" do
+		it "creates a new list" do
+			expect{ post :create, list: FactoryGirl.attributes_for(:list) }.to change(List, :count).by(1)
 		end
 
-		it "returns http code 200" do
-			expect(response).to have_http_status(200)
-		end
-
-		it "creates a list in the DB" do
-			expect(List.all).to contain @list
+		it "redirects to the new contact" do
+			post :create, list: FactoryGirl.attributes_for(:list)
+			expect(response).to redirect_to List.last
 		end
 	end
-
-	describe "edit" do
-		before(:each) do
-			@list = FactoryGirl.create(:list)
-			get(:edit, { 'id' => @list.id })
-		end
-
-		it "returns http code 200" do
-			expect(response).to have_http_status(200)
-		end
-	end
+end
 
 	describe "update" do
 		before(:each) do
@@ -106,6 +93,7 @@ describe ListsController do
 		end
 
 		it "redirects to lists#index" do 
+			get :index
 			expect(response).to render_template :index
 		end
 	end

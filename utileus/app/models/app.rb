@@ -4,4 +4,6 @@ class App < ActiveRecord::Base
 	belongs_to :list
 	has_many :users
 	has_many :reviews, as: :reviewed
+	
+	validates :name, presence: true
 end
