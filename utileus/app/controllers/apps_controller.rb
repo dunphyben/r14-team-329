@@ -19,7 +19,6 @@ class AppsController < ApplicationController
 
 	def edit
 		@app = App.find(params[:id])
-		@apps = App.all
 	end
 
 	def update
