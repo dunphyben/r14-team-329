@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user do
     name { Faker::Name.name }
-    provider "gitHub"
-	uid "123"
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
     profession_id { Faker::Number.number(1) }
   end
 end
