@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20141018215349) do
+=======
+ActiveRecord::Schema.define(version: 20141018210947) do
+>>>>>>> 0baaa6320194b1087a06b46dea6202728e2074d1
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,8 +61,26 @@ ActiveRecord::Schema.define(version: 20141018215349) do
     t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "image"
   end
 
+<<<<<<< HEAD
+=======
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["profession_id"], name: "index_users_on_profession_id", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+>>>>>>> 0baaa6320194b1087a06b46dea6202728e2074d1
   create_table "votes", force: true do |t|
     t.integer  "votable_id"
     t.string   "votable_type"
