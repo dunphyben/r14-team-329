@@ -8,7 +8,7 @@ describe List do
 		it "upvotes a list" do 
 			list = FactoryGirl.create(:list)
 			user = FactoryGirl.create(:user)
-			list .liked_by user
+			list.liked_by user
 
 			expect(list.get_likes.size).to_not eq 0
 		end
