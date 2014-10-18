@@ -3,7 +3,7 @@ class CreateApps < ActiveRecord::Migration
     create_table :apps do |t|
     	t.string :name
     	t.string :url
-    	t.number :list_id
+    	t.integer :list_id
     end
   end
 end
