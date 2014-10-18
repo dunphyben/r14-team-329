@@ -63,15 +63,36 @@ describe ListsController do
 			@list = FactoryGirl.create(:list)
 		end
 
-		it "located the requested @list" do 
-			put :update, id: @list.id, list: FactoryGirl.attributes_for(:list)
-			expect{ assigns(:list).to eq @list }
+		context "with valid attributes" do
+			it "located the requested @list" do 
+				put :update, id: @list.id, list: FactoryGirl.attributes_for(:list)
+				expect{ assigns(:list).to eq @list }
+			end
+
+			it "changes @list's attributes" do
+				put :update, id: @list, list: FactoryGirl.attributes_for(:list, overview: "Updated")
+				@list.reload
+				expect(@list.overview).to eq ("Updated")
+			end
 		end
 
-		it "changes @list's attributes" do
-			put :update, id: @list, list: FactoryGirl.attributes_for(:list, overview: "Updated")
-			@list.reload
-			expect(@list.overview).to eq ("Updated")
+		context "with invalid attributes" do
+			it "located the requested @list" do 
+				put :update, id: @list.id, list: FactoryGirl.attributes_for(:list)
+				expect{ assigns(:list).to eq @list }
+			end
+
+			it "does not change @list's attributes" do 
+				name = @list.name
+				put :update, id: @list.id, list: FactoryGirl.attributes_for(:list, name: nil)
+				@list.reload
+				expect(@list.name).to eq name
+			end
+
+			it "re-renders the edit template" do 
+				put :update, id: @list.id, list: FactoryGirl.attributes_for(:list, name: nil)
+				expect(response).to render_template :edit
+			end
 		end
 	end
 
