@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  acts_as_voter
+  acts_as_votable
   has_and_belongs_to_many :professions
 
   has_many :lists
