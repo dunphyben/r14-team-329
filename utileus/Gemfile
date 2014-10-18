@@ -19,6 +19,7 @@ gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in developm
 gem 'unicorn'
 gem 'omniauth-twitter'
 gem 'figaro'
+gem 'acts_as_votable', '~> 0.10.0'
 
 group :development do
   gem 'better_errors'
