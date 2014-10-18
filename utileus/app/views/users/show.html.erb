@@ -1,0 +1,9 @@
+<h2><%= @out.name %></h2>
+<h2><%= @out.professions.name %></h2>
+
+<h3><%= @out.lists.first.name %></h3>
+<ul>
+	<% @out.lists.first.apps.each do |app| %> 
+	<li><%= app.name %></li>
+	<% end %>
+</ul>

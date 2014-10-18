@@ -1,4 +1,9 @@
 class UsersController < ApplicationController  
+
+  def show
+    @out = User.find(params[:id])
+  end
+  
   def create
     token    = auth_hash[:credentials][:token]
     name     = auth_hash[:info][:name]
