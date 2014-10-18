@@ -12,7 +12,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20141018022624) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +32,13 @@ ActiveRecord::Schema.define(version: 20141018022624) do
   create_table "professions", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "profession_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,5 +58,7 @@ ActiveRecord::Schema.define(version: 20141018022624) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["profession_id"], name: "index_users_on_profession_id", using: :btree
 
 end
