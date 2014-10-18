@@ -101,12 +101,12 @@ describe ListsController do
 			@list = FactoryGirl.create(:list)
 		end
 
-		it "returns http code 200" do 
-			expect(response).to have_http_status(200)
+		it "deletes the @list" do
+			expect{ delete :destroy, id: @list.id }.to change(List, :count).by(-1)
 		end
 
-		it "deletes a list" do
-			expect{ delete :destroy, id: @list.id }.to change(List, :count).by(-1)
+		it "redirects to lists#index" do 
+			expect(response).to render_template :index
 		end
 	end
 end

@@ -37,7 +37,7 @@ class ListsController < ApplicationController
 			redirect_to lists_path, notice: "List deleted."
 		else
 			flash[:alert] = "There was a problem deleting your list. Please try again."
-			render action: :index
+			redirect_to lists_path
 		end
 	end
 
