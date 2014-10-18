@@ -13,7 +13,7 @@ describe ListsController do
 		end
 
 		it "returns a list of a user's lists" do 
-			expect(@user.lists).not_to eq nil
+			expect(List.all).not_to eq nil
 		end
 	end
 end
