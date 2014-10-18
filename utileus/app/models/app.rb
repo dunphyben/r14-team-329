@@ -2,5 +2,6 @@ class App < ActiveRecord::Base
 	acts_as_votable
 	
 	belongs_to :list
-	has_many :reviews
+	has_many :users
+	has_many :reviews, as: :reviewed
 end

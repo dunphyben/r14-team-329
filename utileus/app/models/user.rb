@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
 
   has_many :lists
   has_many :votes
+  has_many :reviews, as: :reviewed
+  
 end
