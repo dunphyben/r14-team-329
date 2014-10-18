@@ -6,9 +6,9 @@ describe List do
 
 	describe "upvote" do 
 		it "upvotes a list" do 
-			user = FactoryGirl.create(:list)
-			list = FactoryGirl.create(:user)
-			list.liked_by user
+			list = FactoryGirl.create(:list)
+			user = FactoryGirl.create(:user)
+			list .liked_by user
 
 			expect(list.get_likes.size).to_not eq 0
 		end

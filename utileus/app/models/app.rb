@@ -3,7 +3,7 @@ class App < ActiveRecord::Base
 	
 	belongs_to :list
 	has_many :users
-	has_many :reviews, as: :reviewed
+	has_many :reviews
 	
 	validates :name, presence: true
 	validates :url, presence: true
