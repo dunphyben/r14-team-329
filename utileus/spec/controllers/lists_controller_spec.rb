@@ -37,6 +37,7 @@ describe ListsController do
 			post :create, list: FactoryGirl.attributes_for(:list)
 			expect(response).to redirect_to List.last
 		end
+		
 		context "with invalid attributes" do 
 			it "does not save the new list" do 
 				expect { post :create, list: FactoryGirl.attributes_for(:list, name: nil) }.to_not change(List, :count)
