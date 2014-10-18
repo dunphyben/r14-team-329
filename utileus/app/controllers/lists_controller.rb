@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-
-def index
-	@out = @user.lists 
+	def index
+		@out = List.all
+	end
 end
