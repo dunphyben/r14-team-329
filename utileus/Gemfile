@@ -19,7 +19,10 @@ gem 'sunspot_rails'
 gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 gem 'unicorn'
 # gem 'omniauth-twitter'
+
 gem 'omniauth-github'
+gem "font-awesome-rails"
+
 gem 'figaro'
 gem 'acts_as_votable', '~> 0.10.0'
 
