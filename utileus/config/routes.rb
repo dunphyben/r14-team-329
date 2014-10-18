@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :lists
+  resources :apps
   get "/auth/:provider/callback" => "users#create"
 
   resources :users
