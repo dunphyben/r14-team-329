@@ -61,16 +61,31 @@ describe ListsController do
 	describe "update" do
 		before(:each) do
 			@list = FactoryGirl.create(:list)
-			@updated_list = FactoryGirl.attributes_for(:list, overview: "This is an updated list.")
-			get(:update, { 'id' => @list.id, 'list' => @updated_list })
 		end
 
-		it "returns http code 302" do 
-			expect(response).to have_http_status(302)
+		it "located the requested @list" do 
+			put :update, id: @list.id, list: FactoryGirl.attributes_for(:list)
+			expect{ assigns(:list).to eq @list }
 		end
 
-		it "updates a list" do
-			expect(List.find(@list.id).overview).to eq "This is an updated list."
+		it "changes @list's attributes" do
+			put :update, id: @list, list: FactoryGirl.attributes_for(:list, overview: "Updated")
+			@list.reload
+			expect(@list.overview).to eq ("Updated")
+		end
+	end
+
+	describe "destroy" do
+		before(:each) do
+			@list = FactoryGirl.create(:list)
+		end
+
+		it "returns http code 200" do 
+			expect(response).to have_http_status(200)
+		end
+
+		it "deletes a list" do
+			expect{ delete :destroy, id: @list.id }.to change(List, :count).by(-1)
 		end
 	end
 end

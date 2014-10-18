@@ -32,8 +32,13 @@ class ListsController < ApplicationController
 		end
 	end
 
-	def delete
-		List.destroy(params[:id])
+	def destroy
+		if List.destroy(params[:id])
+			redirect_to lists_path, notice: "List deleted."
+		else
+			flash[:alert] = "There was a problem deleting your list. Please try again."
+			render action: :index
+		end
 	end
 
 private
