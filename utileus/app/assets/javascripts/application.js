@@ -17,8 +17,9 @@
 
 
 $(function(){
-	$(".element").typed({
+	$(".form-control").typed({
 		strings: ["Web Developer", "Graphic Designer", "Mobile Developer", "Road Warrior", "Real Estate Agent", "Accountant", "CEO"],
+		attr: "placeholder",
 		typeSpeed: 100
 	});
 });
