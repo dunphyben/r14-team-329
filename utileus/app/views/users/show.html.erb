@@ -1,11 +1,23 @@
-<p class="header-center">Search for a profession. Find people. Discover lists.</p>
+<div id="header">
+	<p class="tagline">Search for a profession. Find people. Discover lists.</p>
+	<form id="tfnewsearch" method="get" action="http://www.google.com">
+      <input type="text" id="tfq" class="tftextinput2" name="q" size="45" maxlength="240" value="Web Developer, Real Estate Agent, etc"><input type="submit" value=">" class="tfbutton2">
+	</form>
+</div>
 
-<h2><%= @out.name %></h2>
-<h3><%= @out.professions.first.name %></h3>
+	<div id="userinfo">
+		<h2 class="username"><%= @out.name %></h2>
+		<h3 class="profession"><%= @out.professions.first.name %></h3>
+	</div>
 
-<h4><%= @out.lists.first.name %></h4>
-<ul>
-	<% @out.lists.first.apps.each do |app| %> 
-	<li><%= app.name %></li>
-	<% end %>
-</ul>
+	<div id="applist">
+		<h4 class="title"><%= @out.lists.first.name %></h4>
+			<% @out.lists.first.apps.each do |app| %> 
+				<p class="appname"><%= app.name %></p>
+				<% if app.reviews.count >= 1 %>
+					<p class="review"><%= app.reviews.first.quick_review %></p>
+				<% else %>
+					<p class="review">No review yet! Be the first to review this app!</p>
+				<% end %>
+			<% end %>
+	</div>
