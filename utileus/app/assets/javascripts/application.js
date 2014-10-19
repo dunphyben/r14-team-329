@@ -14,3 +14,11 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+
+$(function(){
+	$(".element").typed({
+		strings: ["Web Developer", "Graphic Designer", "Mobile Developer", "Road Warrior", "Real Estate Agent", "Accountant", "CEO"],
+		typeSpeed: 100
+	});
+});
