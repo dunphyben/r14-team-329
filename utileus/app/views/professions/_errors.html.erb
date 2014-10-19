@@ -1,0 +1,8 @@
+<% if @profession.errors.any? %>
+  <p>Something went wrong:</p>
+  <ul>
+    <% @profession.errors.each do |profession| %>
+      <li><%= profession %></li>
+    <% end %>
+  </ul>
+<% end %>

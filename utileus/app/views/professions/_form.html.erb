@@ -1,0 +1,10 @@
+<%= form_for(@profession) do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "What is your profession? " %><br \>
+    <%= f.text_field :name, :placeholder => "Web Developer, Graphic Designer, Stockbroker etc" %>
+  </div>
+  <div class="form-group">
+    <%= f.hidden_field :user_id, value: current_user.id %><br \>
+  </div>
+  <%= f.submit(:class => "btn btn-default") %>
+<% end %>
