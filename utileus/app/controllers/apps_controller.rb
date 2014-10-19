@@ -8,7 +8,7 @@ class AppsController < ApplicationController
 	end
 
 	def create
-		@app = App.new(app_params)
+	 @app = App.find_or_initialize_by(app_params)
 		if @app.save
 			redirect_to app_path(@app), notice: "App created successfully!"
 		else

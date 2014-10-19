@@ -37,6 +37,7 @@ describe AppsController do
 			post :create, app: FactoryGirl.attributes_for(:app)
 			expect(response).to redirect_to App.last
 		end
+	end
 		
 		context "with invalid attributes" do 
 			it "does not save the new app" do 
@@ -48,8 +49,14 @@ describe AppsController do
 				expect(response).to render_template :new
 			end
 		end
+
+		context "with the same name" do
+			it "does not save the new app" do
+				app = FactoryGirl.create(:app)
+				expect { post :create, app: FactoryGirl.attributes_for(:app, name: app.name, url: app.url) }.to_not change(App, :count)
+			end
+		end
 	end
-end
 
 	describe "update" do
 		before(:each) do
