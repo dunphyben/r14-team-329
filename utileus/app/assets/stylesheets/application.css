@@ -109,6 +109,7 @@ a:link { color:#000000; text-decoration: none; }
 }
 
 .navlead {
+  margin-top: 20px;
   font-size: 20px;
   font-weight: 300;
   line-height: 1.4;

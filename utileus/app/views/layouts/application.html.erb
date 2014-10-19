@@ -5,17 +5,19 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <%= favicon_link_tag 'favicon2.png' %>
+  <%= favicon_link_tag 'favicon3.png' %>
 </head>
 
 <body>
   <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-      	<%= image_tag "navbar-logo3.png" %>
+      	<%= image_tag "navbar-logo6.png" %>
       </div>
       <div class="navbar-collapse collapse navbar-responsive-collapse">
-        <span class="navlead">Search</span>
+      <!-- 	<ul class="navlead">
+      		<li>Search for professions. Find people. Discover lists.</li>
+      	</ul> -->
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
             <li>
